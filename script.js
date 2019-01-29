@@ -1,12 +1,6 @@
 var slide_num = 0;
 var hash_match = window.location.hash.match("^#slide([0-9]+)$");
 
-if (hash_match) {
-	slide_num = parseInt(hash_match[1]);
-} else {
-	slides[0]();
-}
-
 var slides = [
 	() => { window.location.hash = "slide1" },
 	() => { window.location.hash = "slide2" },
@@ -15,6 +9,12 @@ var slides = [
 	() => { window.location.hash = "slide5" },
 	() => { window.location.hash = "slide6" },
 ]
+
+if (hash_match) {
+	slide_num = parseInt(hash_match[1]);
+} else {
+	slides[0]();
+}
 
 function change_slide(n) {
 	slide_num += n;
