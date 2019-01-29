@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Robots, Rockets, and more! Control theory in 10 minutes.</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="dygraph.css">
+		<script src="jquery.js"></script>
+		<script src="ace.js"></script>
+		<script src="dygraph.js"></script>
+		<script type="text/javascript" async src="MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<div class="slide" id="slide1">
+			<center>
+				<br>
+				<br>
+				<h1>Robots, Rockets, and more!</h1>
+				<h2>Control Theory in 10 minutes.</h2>
+				<br>
+				<br>
+				<br>
+				<br>
+				<p>Wesley Aptekar-Cassels</p>
+				<a href="https://twitter.com/WAptekar">@WAptekar</a>
+			</center>
+		</div>
+		<div class="slide" id="slide2">
+			<h1>What is control theory?</h1>
+		</div>
+		<div class="slide nopadding" id="slide3">
+			<video id="v1">
+				<source src="auto.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div class="slide" id="slide4">
+			<h1>What's a system?</h1>
+			<ul>
+				<li>Robots</li>
+				<li>Rockets</li>
+				<li>Elevators</li>
+			</ul>
+		</div>
+		<div class="slide" id="slide5">
+			<canvas class="canvas" id="c1"></canvas>
+			<div class="right_pane">
+				<div class="editor" id="e1"></div>
+				<div class="graph">
+					<div style="width:100%; height:100%;" id="g1"></div>
+				</div>
+			</div>
+			<script>
+				load_sim("e1", "c1", "g1", {"x":0,"xdot":0,"xddot":0,"goal": 5, "mass":100,"gravity":9.8,"timestep":0.05}, `function control(pos, goal) {
+	return 0;
+}
+`);
+			</script>
+		</div>
+		<div class="slide" id="slide6">
+			<h1>State Space</h1>
+			<table class="math_table">
+				<tr>
+					<th>$$ x = \begin{bmatrix} p \\ \dot{p} \end{bmatrix} $$</th>
+					<th>state = [ position, velocity ]</th>
+				</tr>
+				<tr>
+					<th>$$ u = \begin{bmatrix} f \end{bmatrix} $$</th>
+					<th>input = [ force ]</th>
+				</tr>
+				<tr>
+					<th>$$ \dot{x} = \mathbf{A}x + \mathbf{B}u $$</th>
+					<th>state_delta = A * state + B * input</th>
+				</tr>
+			</table>
+			<br>
+			
+		</div>
+	</body>
+</html>
