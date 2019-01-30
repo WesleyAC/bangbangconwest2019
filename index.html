@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<script>
-				load_sim("e1", "c1", "g1", {"x":0,"xdot":0,"xddot":0,"goal": 5, "mass":100,"gravity":9.8,"timestep":0.05}, `function control(pos, goal) {
+				load_sim("e1", "c1", "g1", {"x":0,"xdot":0,"xddot":0,"goal": 5, "mass":100,"damping":20,"gravity":9.8,"timestep":0.05}, `function control(pos, goal) {
 	return 0;
 }
 `);
