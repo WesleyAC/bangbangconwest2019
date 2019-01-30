@@ -1,13 +1,116 @@
 var slide_num = 0;
 var hash_match = window.location.hash.match("^#slide([0-9]+)$");
 
+var p = '<mi>p</mi>'
+var pdot = '<mrow class="MJX-TeXAtom-ORD"><mover><mi>p</mi><mo>˙</mo></mover></mrow>' 
+var pddot = '<mrow class="MJX-TeXAtom-ORD"><mover><mi>p</mi><mo>¨</mo></mover></mrow>' 
+var a4 = "<mo>−</mo><mfrac><mi>damping</mi><mi>mass</mi></mfrac>"
+var b2 = "<mfrac><mi>1</mi><mi>mass</mi></mfrac>"
+var undecided = '<mo>?</mo>' 
+var formula = '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" id="eq1"><mrow><mo>[</mo><mtable rowspacing="4pt" columnspacing="1em"><mtr><mtd id="xd1">{{pdot}}</mtd></mtr><mtr><mtd id="xd2">{{pddot}}</mtd></mtr></mtable><mo>]</mo></mrow><mo>=</mo><mrow><mo>[</mo><mtable rowspacing="4pt" columnspacing="1em"><mtr><mtd id="a1">{{a1}}</mtd><mtd id="a2">{{a2}}</mtd></mtr><mtr><mtd id="a3">{{a3}}</mtd><mtd id="a4">{{a4}}</mtd></mtr></mtable><mo>]</mo></mrow><mrow><mo>[</mo><mtable rowspacing="4pt" columnspacing="1em"><mtr><mtd id="x1">{{p}}</mtd></mtr><mtr><mtd id="x2">{{pdot}}</mtd></mtr></mtable><mo>]</mo></mrow><mo>+</mo><mrow><mo>[</mo><mtable rowspacing="4pt" columnspacing="1em"><mtr><mtd id="b1">{{b1}}</mtd></mtr><mtr><mtd id="b2">{{b2}}</mtd></mtr></mtable><mo>]</mo></mrow><mrow><mo>[</mo><mtable rowspacing="4pt" columnspacing="1em"><mtr><mtd id="u1">{{u1}}</mtd></mtr></mtable><mo>]</mo></mrow></math>'
+var current_formula = formula;
+
+function highlight(id) {
+	$(id).css("color", "red");
+}
+
+function unhighlight(id) {
+	$(id).css("color", "black");
+}
+
 var slides = [
+	() => { window.location.hash = "slide0" },
 	() => { window.location.hash = "slide1" },
 	() => { window.location.hash = "slide2" },
 	() => { window.location.hash = "slide3"; $("#v1")[0].play(); },
 	() => { window.location.hash = "slide4" },
 	() => { window.location.hash = "slide5" },
 	() => { window.location.hash = "slide6" },
+	() => {
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, undecided).replace(/{{a2}}/g, undecided).replace(/{{a3}}/g, undecided).replace(/{{a4}}/g, undecided).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, undecided).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
+	() => { highlight("#a1"); },
+	() => { highlight("#x1"); },
+	() => { highlight("#xd1"); },
+	() => {
+		unhighlight("#a1");
+		unhighlight("#x1");
+		unhighlight("#xd1");
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, undecided).replace(/{{a3}}/g, undecided).replace(/{{a4}}/g, undecided).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, undecided).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
+	() => { highlight("#a2"); },
+	() => { highlight("#x2"); },
+	() => { highlight("#xd1"); },
+	() => {
+		unhighlight("#a2");
+		unhighlight("#x2");
+		unhighlight("#xd1");
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, "<mi>1</mi>").replace(/{{a3}}/g, undecided).replace(/{{a4}}/g, undecided).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, undecided).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
+	() => { highlight("#a3"); },
+	() => { highlight("#x1"); },
+	() => { highlight("#xd2"); },
+	() => {
+		unhighlight("#a3");
+		unhighlight("#x1");
+		unhighlight("#xd2");
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, "<mi>1</mi>").replace(/{{a3}}/g, "<mi>0</mi>").replace(/{{a4}}/g, undecided).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, undecided).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
+	() => { highlight("#a4"); },
+	() => { highlight("#x2"); },
+	() => { highlight("#xd2"); },
+	() => {
+		unhighlight("#a4");
+		unhighlight("#x2");
+		unhighlight("#xd2");
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, "<mi>1</mi>").replace(/{{a3}}/g, "<mi>0</mi>").replace(/{{a4}}/g, a4).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, undecided).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
+	() => { highlight("#b2"); },
+	() => { highlight("#u1"); },
+	() => { highlight("#xd2"); },
+	() => {
+		unhighlight("#b2");
+		unhighlight("#u1");
+		unhighlight("#xd2");
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, "<mi>1</mi>").replace(/{{a3}}/g, "<mi>0</mi>").replace(/{{a4}}/g, a4).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, b2).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
+	() => { highlight("#b1"); },
+	() => { highlight("#u1"); },
+	() => { highlight("#xd1"); },
+	() => {
+		unhighlight("#b1");
+		unhighlight("#u1");
+		unhighlight("#xd1");
+		MathJax.Hub.Queue([
+			"Text",
+			MathJax.Hub.getJaxFor("eq1"),
+			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, "<mi>1</mi>").replace(/{{a3}}/g, "<mi>0</mi>").replace(/{{a4}}/g, a4).replace(/{{b1}}/g, "<mi>0</mi>").replace(/{{b2}}/g, b2).replace(/{{u1}}/g, "<mi>force</mi>")
+		]);
+	},
 ]
 
 if (hash_match) {
