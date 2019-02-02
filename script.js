@@ -22,10 +22,16 @@ var slides = [
 	() => { window.location.hash = "slide0" },
 	() => { window.location.hash = "slide1" },
 	() => { window.location.hash = "slide2" },
+	() => { $("#slide2_1").show(); },
 	() => { window.location.hash = "slide3"; $("#v1")[0].play(); },
 	() => { window.location.hash = "slide4" },
 	() => { window.location.hash = "slide5" },
 	() => { window.location.hash = "slide6" },
+	() => { $("#slide6_1").show(); },
+	() => { $("#slide6_2").show(); },
+	() => { $("#slide6_3").show(); },
+	() => { $("#slide6_4").show(); },
+	() => { $("#eq1").show(); },
 	() => {
 		MathJax.Hub.Queue([
 			"Text",
@@ -248,7 +254,10 @@ function load_sim(editor_id, canvas_id, graph_id, state, control_func) {
 			series: {
 				"time": { axis: "y1" },
 				"position": { axis: "y1" },
-				"force": { axis: "y2" },
+				"force": {
+					axis: "y2",
+					strokeWidth: 0,
+				},
 				"goal": { axis: "y1" },
 			},
 			valueRange: [min_h,max_h],
@@ -258,9 +267,13 @@ function load_sim(editor_id, canvas_id, graph_id, state, control_func) {
 				},
 				y2: {
 					valueRange: [-10000, 10000],
+					drawAxis: false,
+					axisLabelFormatter: (d, g, o, dg) => { return "" },
 				}
 			},
 			dateWindow: [0,250],
+			drawPoints: false,
+			strokeWidth: 4,
 		});
 
 	init_state = JSON.parse(JSON.stringify(state));
