@@ -117,6 +117,7 @@ var slides = [
 			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, "<mi>0</mi>").replace(/{{a2}}/g, "<mi>1</mi>").replace(/{{a3}}/g, "<mi>0</mi>").replace(/{{a4}}/g, a4).replace(/{{b1}}/g, "<mi>0</mi>").replace(/{{b2}}/g, b2).replace(/{{u1}}/g, "<mi>force</mi>")
 		]);
 	},
+	() => { window.location.hash = "slide7" },
 ]
 
 if (hash_match) {
