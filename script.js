@@ -189,11 +189,11 @@ function draw_state(state, canvas_id) {
 	ctx.strokeStyle = 'red';
 	ctx.beginPath();
 	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h));
-	ctx.lineTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/100);
-	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/100);
-	ctx.lineTo(canvas.width/2 - (15*state.out/5000), transform_coords(state.x, canvas.height, min_h, max_h) + state.out/100 - (15*Math.sign(state.out)));
-	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/100);
-	ctx.lineTo(canvas.width/2 + (15*state.out/5000), transform_coords(state.x, canvas.height, min_h, max_h) + state.out/100 - (15*Math.sign(state.out)));
+	ctx.lineTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300);
+	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300);
+	ctx.lineTo(canvas.width/2 - 5, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300 - (5*Math.sign(state.out)));
+	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300);
+	ctx.lineTo(canvas.width/2 + 5, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300 - (5*Math.sign(state.out)));
 	ctx.stroke();
 }
 
