@@ -136,15 +136,42 @@ function change_slide(n) {
 	slides[slide_num]();
 }
 
+var alt = false;
+
 $(document).keydown(function(e) {
 	k = e.originalEvent.keyCode;
 	if (k == 39) {
 		change_slide(1);
 	} else if (k == 37) {
 		change_slide(-1);
+	} else if (k == 18) {
+		alt = true;
+	} else if (k == 49 && alt) {
+		copy_text("clip1");
+	} else if (k == 50 && alt) {
+		copy_text("clip2");
+	} else if (k == 51 && alt) {
+		copy_text("clip3");
+	} else if (k == 52 && alt) {
+		copy_text("clip4");
 	}
 
 });
+
+$(document).keyup(function(e) {
+	k = e.originalEvent.keyCode;
+	if (k == 18) {
+		alt = false;
+	}
+});
+
+function copy_text(element_id) {
+	var e = document.getElementById(element_id);
+	e.select();
+	document.execCommand("copy");
+	document.activeElement.blur();
+	window.scrollTo(0,0);
+}
 
 var min_h = -10;
 var max_h = 10;

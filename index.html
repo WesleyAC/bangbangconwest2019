@@ -180,5 +180,24 @@
 				<h3><a href="https://twitter.com/WAptekar">@WAptekar</a></h3>
 			</center>
 		</div>
+		<textarea id="clip1">function control(position, velocity, goal) {
+	if (position &lt; goal) {
+		return 5000;
+	} else {
+		return -5000;
+	}
+}</textarea>
+		<textarea id="clip2">function control(position, velocity, goal) {
+	var error = (goal - position);
+	return error*2000;
+}</textarea>
+		<textarea id="clip3">function control(position, velocity, goal) {
+	var error = (goal - position);
+	return error*2000 - velocity*400;
+}</textarea>
+		<textarea id="clip4">function control(position, velocity, goal) {
+	var error = (goal - position);
+	return error*2000 - velocity*400 + 980;
+}</textarea>
 	</body>
 </html>
