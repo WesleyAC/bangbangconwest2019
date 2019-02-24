@@ -150,7 +150,7 @@ var max_h = 10;
 
 function sim_elevator(state) {
 	// TODO clamp control func
-	var out = state.control(state.x, state.goal);
+	var out = state.control(state.x, state.xdot, state.goal);
 	state.xddot = (out / state.mass) - (state.damping / state.mass * state.xdot) - state.gravity;
 	state.xdot += state.xddot * state.timestep;
 	state.x += state.xdot * state.timestep;
