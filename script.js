@@ -1,3 +1,10 @@
+// This code is all pretty trash.
+//
+// Sorry about that :(
+//
+// Feel free to email me if you have any questions though!
+// me@wesleyac.com
+
 var slide_num = 0;
 var hash_match = window.location.hash.match("^#slide([0-9]+)$");
 
