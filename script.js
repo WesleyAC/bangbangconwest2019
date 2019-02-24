@@ -151,6 +151,7 @@ var max_h = 10;
 function sim_elevator(state) {
 	// TODO clamp control func
 	var out = state.control(state.x, state.xdot, state.goal);
+	state.out = out;
 	state.xddot = (out / state.mass) - (state.damping / state.mass * state.xdot) - state.gravity;
 	state.xdot += state.xddot * state.timestep;
 	state.x += state.xdot * state.timestep;
@@ -184,6 +185,8 @@ function draw_state(state, canvas_id) {
 	ctx.fillRect(0, transform_coords(state.goal, canvas.height, min_h, max_h), canvas.width, 0.25);
 	ctx.fillStyle = 'grey';
 	ctx.fillRect(canvas.width/2-15, transform_coords(state.x, canvas.height, min_h, max_h)-5, 30, 10);
+	ctx.fillStyle = 'red';
+	ctx.fillRect(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h), 1, state.out/(canvas.height*2));
 }
 
 
