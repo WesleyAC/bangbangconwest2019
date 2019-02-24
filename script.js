@@ -32,13 +32,6 @@ var slides = [
 	() => { $("#slide6_3").show(); },
 	() => { $("#slide6_4").show(); },
 	() => { $("#eq1").show(); },
-	() => {
-		MathJax.Hub.Queue([
-			"Text",
-			MathJax.Hub.getJaxFor("eq1"),
-			formula.replace(/{{p}}/g,"<mi>position</mi>").replace(/{{pdot}}/g, "<mi>velocity</mi>").replace(/{{pddot}}/g, "<mi>acceleration</mi>").replace(/{{a1}}/g, undecided).replace(/{{a2}}/g, undecided).replace(/{{a3}}/g, undecided).replace(/{{a4}}/g, undecided).replace(/{{b1}}/g, undecided).replace(/{{b2}}/g, undecided).replace(/{{u1}}/g, "<mi>force</mi>")
-		]);
-	},
 	() => { highlight("#a1"); },
 	() => { highlight("#x1"); },
 	() => { highlight("#xd1"); },
@@ -131,9 +124,9 @@ function change_slide(n) {
 	slides[slide_num]();
 }
 
-$(document).keypress(function(e) {
+$(document).keydown(function(e) {
 	k = e.originalEvent.keyCode;
-	if (k == 32 || k == 39) {
+	if (k == 39) {
 		change_slide(1);
 	} else if (k == 37) {
 		change_slide(-1);
