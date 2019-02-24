@@ -179,13 +179,13 @@ function getCursorPosition(canvas, event) {
 
 function draw_state(state, canvas_id) {
 	canvas = $("#"+canvas_id)[0];
-	ctx = setupCanvas(canvas); //canvas.getContext('2d');
+	ctx = canvas.getContext('2d');
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = 'blue';
-	ctx.fillRect(0, transform_coords(state.goal, canvas.height, min_h, max_h), canvas.width, 3);
+	ctx.fillRect(0, transform_coords(state.goal, canvas.height, min_h, max_h), canvas.width, 0.25);
 	ctx.fillStyle = 'grey';
-	ctx.fillRect(canvas.width/2-40, transform_coords(state.x, canvas.height, min_h, max_h)-60, 80, 120);
-	ctx.lineWidth = 3;
+	ctx.fillRect(canvas.width/2-15, transform_coords(state.x, canvas.height, min_h, max_h)-5, 30, 10);
+	ctx.lineWidth = 1;
 	ctx.strokeStyle = 'red';
 	ctx.beginPath();
 	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h));
@@ -228,24 +228,6 @@ function update(state, canvas, canvas_id, graph, time, graph_data, init_state, e
 	}
 	draw_state(state, canvas_id);
 	setTimeout(update, state.timestep * 1000, state, canvas, canvas_id, graph, time, graph_data, init_state, editor);
-}
-
-// Get a canvas context that also fixes blurryness
-// https://www.html5rocks.com/en/tutorials/canvas/hidpi/
-function setupCanvas(canvas) {
-	// Get the device pixel ratio, falling back to 1.
-	var dpr = window.devicePixelRatio || 1;
-	// Get the size of the canvas in CSS pixels.
-	var rect = canvas.getBoundingClientRect();
-	// Give the canvas pixel dimensions of their CSS
-	// size * the device pixel ratio.
-	canvas.width = rect.width * dpr;
-	canvas.height = rect.height * dpr;
-	var ctx = canvas.getContext('2d');
-	// Scale all drawing operations by the dpr, so you
-	// don't have to worry about the difference.
-	ctx.scale(dpr, dpr);
-	return ctx;
 }
 
 function load_sim(editor_id, canvas_id, graph_id, state, control_func) {
