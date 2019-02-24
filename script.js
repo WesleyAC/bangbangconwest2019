@@ -196,7 +196,7 @@ function update(state, canvas, canvas_id, graph, time, graph_data, init_state, e
 		eval(editor.getValue());
 		state.control = control;
 		time = 0;
-		graph_data = [[0, state.x, 0, state.goal]];
+		graph_data = [[0, state.x, state.goal]];
 		graph.updateOptions({'file': graph_data});
 		graph.updateOptions({'dateWindow': [0, 250]});
 		graph.resize();
@@ -204,7 +204,7 @@ function update(state, canvas, canvas_id, graph, time, graph_data, init_state, e
 	}
 	if (editor.start) {
 		var out = sim_elevator(state);
-		graph_data.push([time, state.x, out, state.goal]);
+		graph_data.push([time, state.x, state.goal]);
 		if (graph_data.length > 250) {
 			graph_data.shift();
 			graph.updateOptions({'dateWindow': [time-250, time]});
@@ -243,18 +243,14 @@ function load_sim(editor_id, canvas_id, graph_id, state, control_func) {
 		$(this).data("goal", getCursorPosition($(this), e)[1]);
 	});
 
-	graph_data = [[0,state.x, 0, state.goal]];
+	graph_data = [[0, state.x, state.goal]];
 	var graph = new Dygraph(document.getElementById(graph_id), graph_data,
 		{
 			drawPoints: true,
-			labels: ["time", "position", "force", "goal"],
+			labels: ["time", "position", "goal"],
 			series: {
 				"time": { axis: "y1" },
 				"position": { axis: "y1" },
-				"force": {
-					axis: "y2",
-					strokeWidth: 0,
-				},
 				"goal": { axis: "y1" },
 			},
 			valueRange: [min_h,max_h],
