@@ -190,16 +190,18 @@ function draw_state(state, canvas_id) {
 	ctx.fillRect(0, transform_coords(state.goal, canvas.height, min_h, max_h), canvas.width, 0.25);
 	ctx.fillStyle = 'grey';
 	ctx.fillRect(canvas.width/2-15, transform_coords(state.x, canvas.height, min_h, max_h)-5, 30, 10);
-	ctx.lineWidth = 1;
-	ctx.strokeStyle = 'red';
-	ctx.beginPath();
-	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h));
-	ctx.lineTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300);
-	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300);
-	ctx.lineTo(canvas.width/2 - 5, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300 - (5*Math.sign(state.out)));
-	ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300);
-	ctx.lineTo(canvas.width/2 + 5, transform_coords(state.x, canvas.height, min_h, max_h) + state.out/300 - (5*Math.sign(state.out)));
-	ctx.stroke();
+	if (state.out != 0) {
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = 'red';
+		ctx.beginPath();
+		ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h));
+		ctx.lineTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) - state.out/300);
+		ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) - state.out/300);
+		ctx.lineTo(canvas.width/2 - 5, transform_coords(state.x, canvas.height, min_h, max_h) - state.out/300 + (5*Math.sign(state.out)));
+		ctx.moveTo(canvas.width/2, transform_coords(state.x, canvas.height, min_h, max_h) - state.out/300);
+		ctx.lineTo(canvas.width/2 + 5, transform_coords(state.x, canvas.height, min_h, max_h) - state.out/300 + (5*Math.sign(state.out)));
+		ctx.stroke();
+	}
 }
 
 
